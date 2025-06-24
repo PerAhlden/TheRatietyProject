@@ -13,7 +13,7 @@ import (
 	"go.wdy.de/nago/web/vuejs"
 )
 
-//go:embed "Mobile voting.jpg"
+//go:embed vote-for-blog.jpg
 var logo application.StaticBytes
 
 func main() {
@@ -39,7 +39,10 @@ func main() {
 		})
 
 		cfg.RootViewWithDecoration("aktuelleAbstimmung", func(wnd core.Window) core.View {
-			return VStack(Text("Hier sollten sie am aktuellen Voting teilnehmen können."))
+			return HStack(
+				defaultButtons(),
+				VLine(),
+			).Gap(L16).Alignment(Top).Frame(Frame{}.FullWidth())
 		})
 
 		cfg.RootViewWithDecoration("chat", func(wnd core.Window) core.View {
@@ -49,4 +52,13 @@ func main() {
 		})
 
 	}).Run()
+}
+
+func defaultButtons() core.View {
+	return VStack(
+		Text("The actual Voting ").Font(Title),
+		SecondaryButton(nil).Title("First Candidate"),
+		SecondaryButton(nil).Title("Second Candidate"),
+	).Gap(L16).
+		Padding(Padding{}.All(L16))
 }
