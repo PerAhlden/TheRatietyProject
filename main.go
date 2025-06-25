@@ -46,7 +46,7 @@ func main() {
 			MenuEntry().Title("Aktuelle Abstimmung").Icon(icons.UserGroup).Forward("aktuelleAbstimmung").OneOfRole().
 			MenuEntry().Title("Chat").Icon(icons.ChatBubbleLeft).Forward("chat").OneOfRole().
 			MenuEntry().Title("Übersicht").Icon(icons.ArchiveBox).Forward("overview").OneOfRole().
-			MenuEntry().Title("Alte Fragen").Icon(icons.QuestionMarkCircle).Forward("fragen").OneOfRole().
+			MenuEntry().Title("Alte Fragen").Icon(icons.QuestionMarkCircle).Forward("oldquestions").OneOfRole().
 			Decorator())
 
 		cfg.RootViewWithDecoration(".", func(wnd core.Window) core.View {

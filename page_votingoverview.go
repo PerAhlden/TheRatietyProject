@@ -17,7 +17,7 @@ func PageVotingOverview(repo voting.Repository) core.View {
 
 	return ui.VStack(
 		ui.Table(
-			ui.TableColumn(ui.Text("Name")),
+			ui.TableColumn(ui.Text("Namen")),
 			ui.TableColumn(ui.Text("Antwort 1")),
 			ui.TableColumn(ui.Text("Antwort 2")),
 			ui.TableColumn(ui.Text("Antwort 3")),

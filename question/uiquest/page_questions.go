@@ -17,7 +17,7 @@ func PageQuestions(repo question.Repository) core.View {
 
 	return ui.VStack(
 		ui.Table(
-			ui.TableColumn(ui.Text("Frage")),
+			ui.TableColumn(ui.Text("Fragen")),
 			ui.TableColumn(ui.Text("Antwort 1")),
 			ui.TableColumn(ui.Text("Antwort 2")),
 			ui.TableColumn(ui.Text("Antwort 3")),
