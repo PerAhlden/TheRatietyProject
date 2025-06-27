@@ -1,7 +1,6 @@
 package uiquest
 
 import (
-	"TheRatietyProject/question"
 	"fmt"
 	"go.wdy.de/nago/pkg/data"
 	"go.wdy.de/nago/pkg/xslices"
@@ -9,6 +8,7 @@ import (
 	"go.wdy.de/nago/presentation/ui"
 	"go.wdy.de/nago/presentation/ui/alert"
 	"go.wdy.de/nago/presentation/ui/form"
+	"theRatietyProject/question"
 )
 
 func PageQuestions(wnd core.Window, repo question.Repository) core.View {

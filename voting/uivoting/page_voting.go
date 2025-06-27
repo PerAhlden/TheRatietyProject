@@ -1,8 +1,6 @@
-package main
+package uivoting
 
 import (
-	"TheRatietyProject/question"
-	"TheRatietyProject/voting"
 	"fmt"
 	"go.wdy.de/nago/application/session"
 	"go.wdy.de/nago/pkg/xslices"
@@ -10,6 +8,8 @@ import (
 	. "go.wdy.de/nago/presentation/ui"
 	"go.wdy.de/nago/presentation/ui/alert"
 	"strings"
+	"theRatietyProject/question"
+	"theRatietyProject/voting"
 )
 
 func PageVoting(wnd core.Window, votingRepo voting.Repository, questRepo question.Repository) core.View {

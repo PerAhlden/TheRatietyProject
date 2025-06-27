@@ -5,9 +5,6 @@
 package main
 
 import (
-	"TheRatietyProject/question"
-	"TheRatietyProject/question/uiquest"
-	"TheRatietyProject/voting"
 	_ "embed"
 	"github.com/worldiety/option"
 	"go.wdy.de/nago/application"
@@ -18,11 +15,13 @@ import (
 	icons "go.wdy.de/nago/presentation/icons/hero/solid"
 	. "go.wdy.de/nago/presentation/ui"
 	"go.wdy.de/nago/web/vuejs"
+	"theRatietyProject/question"
+	"theRatietyProject/question/uiquest"
+	"theRatietyProject/static"
+	"theRatietyProject/voting"
+	"theRatietyProject/voting/uivoting"
 	"time"
 )
-
-//go:embed vote-for-blog.jpg
-var logo application.StaticBytes
 
 func main() {
 	application.Configure(func(cfg *application.Configurator) {
@@ -31,7 +30,7 @@ func main() {
 		option.MustZero(cfg.StandardSystems())
 		roleManagement := std.Must(cfg.RoleManagement())
 		userManagement := std.Must(cfg.UserManagement())
-		votingLogo := cfg.Resource(logo)
+		votingLogo := cfg.Resource(static.Logo)
 
 		questionRepo := application.SloppyRepository[question.Question, question.ID](cfg)
 		votingRepo := application.SloppyRepository[voting.Voting, session.ID](cfg)
@@ -70,7 +69,7 @@ func main() {
 
 		cfg.RootViewWithDecoration("aktuelleAbstimmung", func(wnd core.Window) core.View {
 			return HStack(
-				PageVoting(wnd, votingRepo, questionRepo),
+				uivoting.PageVoting(wnd, votingRepo, questionRepo),
 				VLine(),
 			).Gap(L16).Alignment(Top).Frame(Frame{}.FullWidth())
 		})
@@ -83,7 +82,7 @@ func main() {
 		//})
 		// TODO chat repository erstellen genau wie voting repository, so hat man einen leichten chat
 		cfg.RootViewWithDecoration("overview", func(wnd core.Window) core.View {
-			return PageVotingOverview(votingRepo, questionRepo)
+			return uivoting.PageVotingOverview(votingRepo, questionRepo)
 		})
 
 		cfg.RootViewWithDecoration("oldquestions", func(wnd core.Window) core.View {

@@ -1,9 +1,9 @@
 package voting
 
 import (
-	"TheRatietyProject/question"
 	"go.wdy.de/nago/application/session"
 	"go.wdy.de/nago/pkg/data"
+	"theRatietyProject/question"
 )
 
 type Voting struct {

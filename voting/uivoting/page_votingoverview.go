@@ -1,13 +1,13 @@
-package main
+package uivoting
 
 import (
-	"TheRatietyProject/question"
-	"TheRatietyProject/voting"
 	"go.wdy.de/nago/pkg/xslices"
 	"go.wdy.de/nago/presentation/core"
 	"go.wdy.de/nago/presentation/ui"
 	"go.wdy.de/nago/presentation/ui/alert"
 	"strconv"
+	"theRatietyProject/question"
+	"theRatietyProject/voting"
 )
 
 func PageVotingOverview(votingRepo voting.Repository, questionRepo question.Repository) core.View {

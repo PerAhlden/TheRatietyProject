@@ -1,4 +1,4 @@
-module TheRatietyProject
+module theRatietyProject
 
 go 1.24.1
 
