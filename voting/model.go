@@ -14,7 +14,6 @@ type Voting struct {
 	Answer1  bool
 	Answer2  bool
 	Answer3  bool
-	Answer4  bool
 	Name     string
 }
 

@@ -12,6 +12,10 @@ import (
 )
 
 func PageQuestions(wnd core.Window, repo question.Repository) core.View {
+	if !wnd.Subject().Valid() {
+		return alert.Banner("Anmeldung erforderlich", "Um fortzufahren, müssen Sie sich am System anmelden.")
+	}
+
 	questions, err := xslices.Collect2(repo.All())
 	if err != nil {
 		return alert.BannerError(err)
@@ -52,7 +56,7 @@ func PageQuestions(wnd core.Window, repo question.Repository) core.View {
 						}
 
 						createQuestDialogPresented.Invalidate()
-					}).Title("Frage aktivieren")),
+					}).Title("Frage aktivieren").Enabled(wnd.Subject().HasRole("asphaltier.role"))),
 				)
 			})...,
 		),

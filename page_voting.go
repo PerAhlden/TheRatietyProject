@@ -5,14 +5,25 @@ import (
 	"TheRatietyProject/voting"
 	"fmt"
 	"go.wdy.de/nago/application/session"
+	"go.wdy.de/nago/pkg/xslices"
 	"go.wdy.de/nago/presentation/core"
 	. "go.wdy.de/nago/presentation/ui"
 	"go.wdy.de/nago/presentation/ui/alert"
 	"strings"
 )
 
-// TODO ohne Namen keine Abstimmung
 func PageVoting(wnd core.Window, votingRepo voting.Repository, questRepo question.Repository) core.View {
+	votings, err := xslices.Collect2(votingRepo.All())
+	if err != nil {
+		return alert.BannerError(err)
+	}
+
+	questions, err := xslices.Collect2(questRepo.All())
+	if err != nil {
+		return alert.BannerError(err)
+
+	}
+
 	invalidate := core.AutoState[int](wnd)
 
 	optActiveQuest, err := question.FindActiveQuestion(questRepo)
@@ -37,12 +48,28 @@ func PageVoting(wnd core.Window, votingRepo voting.Repository, questRepo questio
 		return vote.Name
 	})
 
-	var counter = core.AutoState[int](wnd)
+	//var counter = core.AutoState[int](wnd)
+	giveCount := make(map[question.ID]int)
+
+	for _, q := range questions {
+		if q.ID == quest.ID {
+			counter := 0
+
+			for _, v := range votings {
+				if v.Question == q.ID && v.Voted {
+					counter++
+				}
+			}
+
+			giveCount[q.ID] = counter
+		}
+	}
+
 	return VStack(
 		Text(quest.Text).Font(Title),
-		Text(fmt.Sprintf("%d", counter.Get())),
+		Text(fmt.Sprintf("%d", giveCount[quest.ID])),
 		TextField("Dein Name", nameState.Get()).InputValue(nameState).Disabled(vote.Voted),
-		// TODO Disabled ergänzen mit oder (if) nutzername leer
+
 		SecondaryButton(func() {
 			vote.Answer0 = true
 			vote.Voted = true
